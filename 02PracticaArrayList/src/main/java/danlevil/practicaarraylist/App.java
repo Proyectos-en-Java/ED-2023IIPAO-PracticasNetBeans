@@ -3,7 +3,6 @@
  */
 
 package danlevil.practicaarraylist;
-
 import java.util.List;
 
 /**
@@ -13,30 +12,32 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("02practicaRecursion");
+        System.out.println("02practicaArrayList");
         List <String> l1 = new ArrayList();
         
-        l1.add( "0nuevoPal");
-        l1.add( "1nuevoPaal");        
-        l1.add( "2nuevoPal");
-        l1.add( "3nuevoaaaaPal");
-        l1.add( "4nuevoaaaaPal");
-        l1.add( "5nuevoaaaaPal");
-        l1.add( "6nuevoaaaaPal");
-        l1.add( "7nuevoaaaaPal");
-        l1.add( "8nuevoaaaaPal");
-        l1.add( "9nuevoaaaaPal");//aqui se corta
-       l1.add( "10nuevoaaaaPal");
-       l1.add( "12nuevoaaaaPal");
-       l1.add( "10nuevoaaaaPal");
-       l1.add( "12nuevoaaaaPal");
-       l1.add( "10nuevoaaaaPal");
-       l1.add( "12nuevoaaaaPal");
-       l1.add( "10nuevoaaaaPal");
-       l1.add( "12nuevoaaaaPal");
-       l1.add( "10nuevoaaaaPal");
-       l1.add( "12nuevoaaaaPal");
+        System.out.println("cE antes :"+l1.size()+'\n');
 
+        l1.add("1");
+        l1.add("2");
+
+        l1.add( "3");        
+        l1.add( "4");
+        l1.add( "5");
+        
+        
+        
+        
+        l1.add( "6");
+        l1.add( "7");
+        l1.add( "8");
+        l1.add( "9");
+        l1.add( "10");
+        l1.add("11");        
+        l1.add( "12");
+        
+        l1.add(0,"desplazamiento");
+        l1.add(3,"desplazamiento2");
+        l1.add(5,"desplazamiento3");
 
         System.out.println("\n");
 
@@ -44,7 +45,8 @@ public class App {
             System.out.println(l1.get(i));
         }
         
-        
+        System.out.println("\ncE despues "+l1.size());
+
         
     }
 }

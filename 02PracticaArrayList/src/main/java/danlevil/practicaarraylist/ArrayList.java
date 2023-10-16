@@ -46,20 +46,32 @@ public class ArrayList<E> implements List<E> {
         }
         elementos=nuevo;
     }
+    
     @Override
     public void add(int index, E element) {
-        if(elementos[index]==null){
-            elementos[index]=element;
-            capacidadEfectiva+=1;
-        }else{
-            int nuevoStart=index+1;
-            if(capacidadEfectiva==capacidad){capacidad+=1;}
-            for(int i=index;elementos[i]==null;i++){
-                elementos[nuevoStart]=elementos[i];
-            }
-            elementos[index]=element;
-            capacidadEfectiva+=1;
+        if (capacidadEfectiva==0){
+            System.out.println("El array esta vacio, agregando al inicio");
+            elementos[0]= element;
+            capacidadEfectiva++;
         }
+        if(index>capacidadEfectiva){throw new IllegalArgumentException(""
+                + "Espacios vacios dentro del arreglo");
+        }
+        if(capacidadEfectiva==capacidad){aumentarMemoria();}
+        
+        int mover = capacidadEfectiva-index; 
+        int nuevoFinal;  
+        int puntoPartida=capacidadEfectiva-1;
+        
+        for(nuevoFinal=capacidadEfectiva;mover>=0;nuevoFinal--){
+            if(mover==capacidadEfectiva){mover-=1;}
+            elementos[nuevoFinal]=elementos[puntoPartida];
+            mover--;   
+            puntoPartida--;
+        }
+        elementos[index]= element;
+        capacidadEfectiva++;        
+        
     }
     @Override
     public E remove(int index) {
