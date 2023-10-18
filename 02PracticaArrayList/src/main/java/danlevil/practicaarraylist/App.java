@@ -12,21 +12,15 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("02practicaArrayList");
+        System.out.println("02practicaArrayList\n");
         List <String> l1 = new ArrayList();
-        
-        System.out.println("cE antes :"+l1.size()+'\n');
+        System.out.println("ADD Prueba\n");
 
         l1.add("1");
         l1.add("2");
-
         l1.add( "3");        
         l1.add( "4");
         l1.add( "5");
-        
-        
-        
-        
         l1.add( "6");
         l1.add( "7");
         l1.add( "8");
@@ -38,14 +32,30 @@ public class App {
         l1.add(0,"desplazamiento");
         l1.add(3,"desplazamiento2");
         l1.add(5,"desplazamiento3");
+        
+        for (int i = 0; i < l1.size(); i++) {
+            System.out.println(l1.get(i));
+        }
 
-        System.out.println("\n");
+        System.out.println("\nRemove Prueba\n");
+        
+        l1.remove(0);
+        l1.remove(0);
+        l1.remove(l1.size()-1);
+        l1.remove(5);
+        l1.remove(5);
+        l1.remove(1);
 
         for(int i=0; i<l1.size();i++){
             System.out.println(l1.get(i));
         }
         
-        System.out.println("\ncE despues "+l1.size());
+        System.out.println("\nRemove Prueba array vacio");
+     
+        List <String> l2 = new ArrayList();
+        l2.remove(3);
+
+        
 
         
     }

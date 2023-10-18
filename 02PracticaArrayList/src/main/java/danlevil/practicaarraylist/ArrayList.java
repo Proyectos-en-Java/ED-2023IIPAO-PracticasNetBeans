@@ -27,7 +27,6 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         if(capacidadEfectiva==capacidad){
-            System.out.println("Estoy lleno, cargando mas memoria");
             aumentarMemoria();
         
         }
@@ -38,7 +37,6 @@ public class ArrayList<E> implements List<E> {
     }
     
     private void aumentarMemoria(){
-        System.out.println("aumentando memoria");
         capacidad=capacidad+(capacidad/2);
         E[]nuevo= (E[])new Object[capacidad];
         for(int i=0;i<capacidadEfectiva;i++){
@@ -75,7 +73,23 @@ public class ArrayList<E> implements List<E> {
     }
     @Override
     public E remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(index<0){
+            throw new IndexOutOfBoundsException("Indice fuera del rango valido"); 
+        }
+        if (capacidadEfectiva==0){
+            System.out.println("\nEl arrayList esta vacio\n");
+        }
+        int mover = capacidadEfectiva- (index+1);
+        int nuevoInicio=index+1;
+        E eliminado=elementos[index];
+        for (int i=index;mover>0;i++){
+            elementos[i]=elementos[nuevoInicio];
+            mover--;
+            nuevoInicio++;
+        }
+        capacidadEfectiva--;
+        return eliminado;
+        
     }
 
     @Override
