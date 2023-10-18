@@ -73,12 +73,13 @@ public class ArrayList<E> implements List<E> {
     }
     @Override
     public E remove(int index) {
-        if(index<0){
+        if(index<0 || index>capacidadEfectiva){
             throw new IndexOutOfBoundsException("Indice fuera del rango valido"); 
         }
         if (capacidadEfectiva==0){
             System.out.println("\nEl arrayList esta vacio\n");
         }
+        
         int mover = capacidadEfectiva- (index+1);
         int nuevoInicio=index+1;
         E eliminado=elementos[index];

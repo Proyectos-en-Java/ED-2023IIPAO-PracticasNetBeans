@@ -9,6 +9,7 @@ import java.util.List;
  *
  * @author danlevil
  */
+//Este proyecto se compila con Java 11. Actualizar el POM en caso de error.
 public class App {
 
     public static void main(String[] args) {
@@ -41,10 +42,20 @@ public class App {
         
         l1.remove(0);
         l1.remove(0);
-        l1.remove(l1.size()-1);
-        l1.remove(5);
         l1.remove(5);
         l1.remove(1);
+        l1.remove(1);
+        l1.remove(4);
+        l1.remove(l1.size()-1);
+        l1.remove(l1.size()-3);
+        l1.remove(l1.size()-1);
+        l1.remove(l1.size()-1);
+        l1.remove(l1.size()-1);
+
+
+
+
+
 
         for(int i=0; i<l1.size();i++){
             System.out.println(l1.get(i));
