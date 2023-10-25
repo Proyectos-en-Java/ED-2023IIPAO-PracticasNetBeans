@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @author CltControl
  */
+//Proyecto compilado con maven 11. En caso de error actualizar el POM
 public class LinkedListPractica {
 
     public static void main(String[] args) {
@@ -33,6 +34,9 @@ public class LinkedListPractica {
         l2.add("p3");
         l1.unirLista(l2);
         l1.imprimirLinked();
+        System.out.println("\tPrueba revertir lista");
+        LinkedList<String> invertida= l1.revertir();
+        invertida.imprimirLinked();
         
         
         

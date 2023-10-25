@@ -110,6 +110,17 @@ public class LinkedList<E> implements List<E> {
         this.setUltimo(l2.getUltimo());
         return true;
     }
+    public LinkedList <E> revertir(){
+        LinkedList reversedList = new LinkedList();
+        Nodo current = this.primero;
+        while (current != null) {
+            Nodo next = current.siguiente;  
+            current.siguiente = reversedList.primero;  
+            reversedList.primero = current;  
+            current = next;  
+        }
+        return reversedList;
+    }
     @Override
     public boolean isEmpty() {
         if(this.primero==null ){return true;}
