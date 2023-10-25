@@ -16,10 +16,10 @@ import java.util.ListIterator;
 public class LinkedList<E> implements List<E> {
     Nodo<E> primero;
     Nodo<E> ultimo;
-    int size=0;
     LinkedList(){
         primero=null;
     }
+    
 
 
     public class Nodo<E>{
@@ -40,12 +40,28 @@ public class LinkedList<E> implements List<E> {
         }
 
     }
+
+    private Nodo<E> getPrimero() {
+        return primero;
+    }
+
+    private void setPrimero(Nodo<E> primero) {
+        this.primero = primero;
+    }
+
+    private Nodo<E> getUltimo() {
+        return ultimo;
+    }
+
+    private void setUltimo(Nodo<E> ultimo) {
+        this.ultimo = ultimo;
+    }
+    
     @Override
     public boolean add(E e) {
         if(primero==null){
             primero= new Nodo(e);
             ultimo=primero;
-            size++;
             return true;
         }
         Nodo<E> nuevoUltimo= new Nodo(e);
@@ -53,32 +69,51 @@ public class LinkedList<E> implements List<E> {
        
         ultimo= nuevoUltimo;
         ultimo.setSiguiente(null);
-        size++;
         return true;
 
     }
     @Override
     public int size(){
         int count=0;
-        Nodo<E> n=this.primero;
-        while(n!=null){
+//        Nodo<E> n=this.primero;
+//        while(n!=null){
+//            count++;
+//            n= n.getSiguiente();
+//        }
+        Nodo<E> n;
+        for (n=this.primero;n!=null;n= n.getSiguiente()){
             count++;
-            n= n.getSiguiente();
         }
         return count;
     }
     public void imprimirLinked(){
-        Nodo<E> n=this.primero;
-        while(n!=null){
+        Nodo<E> n;
+//        while(n!=null){
+//            System.out.println(n.getContenido()+"");
+//            n= n.getSiguiente();
+//        }
+        for (n=this.primero;n!=null;n= n.getSiguiente()){
             System.out.println(n.getContenido()+"");
-            n= n.getSiguiente();
         }
         
     }
-
+    
+    public void unirLista(LinkedList<E> l2){
+        this.ultimo.setSiguiente(l2.getPrimero());
+        this.setUltimo(l2.getUltimo());
+    }
+    
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        LinkedList<E> l2=(LinkedList<E>)c;
+        this.ultimo.setSiguiente(l2.getPrimero());
+        this.setUltimo(l2.getUltimo());
+        return true;
+    }
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(this.primero==null ){return true;}
+        return false;
     }
 
     @Override
@@ -113,10 +148,7 @@ public class LinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {

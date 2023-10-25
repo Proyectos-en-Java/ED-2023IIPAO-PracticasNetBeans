@@ -18,13 +18,23 @@ public class LinkedListPractica {
         l1.add("1");
         l1.add("2");
         l1.add("3");
-        System.out.println("añadidos...");
+        l1.add("4");
+        System.out.println("agregados...");
         
         System.out.println("\n\tPrueba de size");
         System.out.println( l1.size());
         
         System.out.println("\n\tPrueba Imprimir lista");
         l1.imprimirLinked();
-
+        System.out.println("\n\tPrueba Unir listas");
+        LinkedList<String> l2= new LinkedList<String>();
+        l2.add("p1");
+        l2.add("p2");
+        l2.add("p3");
+        l1.unirLista(l2);
+        l1.imprimirLinked();
+        
+        
+        
     }
 }
