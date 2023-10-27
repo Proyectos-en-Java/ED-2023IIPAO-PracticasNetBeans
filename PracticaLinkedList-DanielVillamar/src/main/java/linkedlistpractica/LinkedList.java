@@ -16,6 +16,7 @@ import java.util.ListIterator;
 public class LinkedList<E> implements List<E> {
     private Nodo<E> primero;
     private Nodo<E> ultimo;
+    private int tamaño=0;
     LinkedList(){
         primero=null;
     }
@@ -51,7 +52,7 @@ public class LinkedList<E> implements List<E> {
         this.primero = primero;
     }
 
-    private Nodo<E> getUltimo() {
+    public Nodo<E> getUltimo() {
         return ultimo;
     }
 
@@ -64,6 +65,7 @@ public class LinkedList<E> implements List<E> {
         if(primero==null){
             primero= new Nodo(e);
             ultimo=primero;  
+            tamaño++;
             return true;
         }
         Nodo<E> nuevoUltimo= new Nodo(e);
@@ -71,6 +73,7 @@ public class LinkedList<E> implements List<E> {
        
         ultimo= nuevoUltimo;
         ultimo.setSiguiente(null);
+        tamaño++;
         return true;
 
     }
@@ -93,6 +96,7 @@ public class LinkedList<E> implements List<E> {
     }
     
     public void unirLista(LinkedList<E> l2){
+        tamaño+=l2.size();
         this.ultimo.setSiguiente(l2.getPrimero());
         this.setUltimo(l2.getUltimo());
     }
@@ -155,15 +159,50 @@ public class LinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException(
                     "Indice fuera de los límites del LinkedLIst");
         }
+        Nodo <E> encontrado=findNode(index);
+        return (encontrado!=null)?encontrado.getContenido():null;
+    }
+    private Nodo<E> findNode(int index){
+        int count=0;
         Nodo <E> n;
-        int count=1;
-        for(n=this.primero.getSiguiente();n!=null;n=n.getSiguiente()){
+        for(n=this.primero;n!=null; n=n.getSiguiente()){
             if(count==index){
-                return n.getContenido();
+                return n;
             }
             count++;
         }
         return null;
+    }
+    @Override
+    public E remove(int index) {
+        
+        if(index<=0 || index>tamaño){
+            throw new IndexOutOfBoundsException(
+            "Indice fuera de los límites del LinkedLIst");
+        }
+        Nodo <E> encontrado=findNode(index);
+        if(encontrado!=null && index==1){
+            Nodo<E> next= encontrado.getSiguiente();
+            Nodo<E> before=this.primero;
+            before.setSiguiente(next);
+            tamaño--;
+            return encontrado.getContenido();
+        }
+        
+        if(encontrado!=null && index>1){
+            Nodo<E> next= encontrado.getSiguiente();
+            Nodo<E> before= findNode(index-1);
+            before.setSiguiente(next);
+            if(index==tamaño-1){this.ultimo=before;}
+            tamaño--;
+            return encontrado.getContenido();
+            
+        }
+        return null;
+    }
+    public E removeLast(){
+        
+        return remove(tamaño-1);
     }
     @Override
     public boolean isEmpty() {
@@ -237,10 +276,7 @@ public class LinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public E remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
     @Override
     public int indexOf(Object o) {

@@ -42,9 +42,7 @@ public class LinkedListPractica {
         System.out.println("\tPrueba revertir lista");
         LinkedList<String> invertida= l1.revertir();
         invertida.imprimirLinked();
-        
-        System.out.println(l1.size());
-        System.out.println(invertida.size());
+
         
         System.out.println("\tPrueba getLast");
         String s = l1.getLast();
@@ -54,8 +52,24 @@ public class LinkedListPractica {
         System.out.println("\tPrueba get(Index)");
         
         System.out.println(l1.get(0));
+        System.out.println(l1.get(6));
         System.out.println(l1.get(14));
         //System.out.println(l1.get(-1));
+        
+        System.out.println("\tPrueba remove(Index)");
+        
+        System.out.println("Eliminados: "+l1.remove(2));
+        System.out.println("Eliminados: "+l1.remove(1));
+        System.out.println("");
+        l1.imprimirLinked();
+        //System.out.println(l1.remove(20));
+        
+        System.out.println("\tPrueba removeLast");
+        System.out.println("Eliminados: "+l1.removeLast());
+        System.out.println("");
+        l1.imprimirLinked();
+        System.out.println(l1.getUltimo().contenido);
+        System.out.println(l1.size());
         
         
 
