@@ -16,7 +16,7 @@ import java.util.ListIterator;
 public class LinkedList<E> implements List<E> {
     private Nodo<E> primero;
     private Nodo<E> ultimo;
-    private int tamaño=0;
+    public int tamaño=0;
     LinkedList(){
         primero=null;
     }
@@ -204,6 +204,33 @@ public class LinkedList<E> implements List<E> {
         
         return remove(tamaño-1);
     }
+    
+    @Override
+    public void add(int index, E element) {
+        boolean pass=true;
+        if(index<=0 || index>tamaño){
+            throw new IndexOutOfBoundsException(
+            "Indice fuera de los límites del LinkedLIst");
+        }
+        else if (index==tamaño){
+            add(element);
+            pass=false;
+        }
+        Nodo <E> encontrado=findNode(index);
+        Nodo <E> nuevoNodo= new Nodo(element);
+        
+        if(encontrado!=null && index==1 && pass){
+            Nodo<E> before=this.primero;
+            before.setSiguiente(nuevoNodo);
+            nuevoNodo.setSiguiente(encontrado);
+            tamaño++;
+        }
+        else if(encontrado!=null && pass){
+            Nodo<E> before= findNode(index-1);
+            before.setSiguiente(nuevoNodo);
+            nuevoNodo.setSiguiente(encontrado);
+        }
+    }
     @Override
     public boolean isEmpty() {
         if(this.primero==null ){return true;}
@@ -270,13 +297,6 @@ public class LinkedList<E> implements List<E> {
     public E set(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public void add(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
 
     @Override
     public int indexOf(Object o) {

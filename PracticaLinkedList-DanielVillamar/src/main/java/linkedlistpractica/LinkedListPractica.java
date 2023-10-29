@@ -68,13 +68,14 @@ public class LinkedListPractica {
         System.out.println("Eliminados: "+l1.removeLast());
         System.out.println("");
         l1.imprimirLinked();
-        System.out.println(l1.getUltimo().contenido);
-        System.out.println(l1.size());
         
-        
-
-        
-        
+        System.out.println("\tPrueba add(Index)");
+        l1.add(1, "nuevoElemento1");
+        l1.add(3, "nuevoElemento2");
+        l1.add(l1.tamaño, "nuevoElemento3");
+        //l1.add(0, "nuevoElemento3");
+        //l1.add(20, "nuevofail");
+        l1.imprimirLinked();
         
     }
 }
