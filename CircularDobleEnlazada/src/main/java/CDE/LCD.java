@@ -54,7 +54,7 @@ public class LCD<E> implements List<E>{
         return start;
     }
 
-    public int getTamaño() {
+    private int getTamaño() {
         return tamaño;
     }
     
@@ -62,36 +62,133 @@ public class LCD<E> implements List<E>{
     public boolean add(E e) {
         if(start==null){
             start= new Nodo(e);
-            start.setSiguiente(start);
-            start.setPrevio(start);
+            start.setSiguiente(this.start);
+            start.setPrevio(this.start);
             tamaño++;
             return true;
         }
         Nodo<E> nuevoNodo= new Nodo(e);
-        nuevoNodo.setSiguiente(start);
-        Nodo<E> ultimo=start.getPrevio();
-        ultimo.setSiguiente(nuevoNodo);
-        start.setPrevio(nuevoNodo);
-        nuevoNodo.setPrevio(start);
+        Nodo<E> inicio= this.start;
+        Nodo<E> prevInicio=inicio.getPrevio();
+        nuevoNodo.setPrevio(prevInicio);
+        nuevoNodo.setSiguiente(inicio);
+        inicio.setPrevio(nuevoNodo);
+        prevInicio.setSiguiente(nuevoNodo);
+        
         
         
         tamaño++;
         return true;
 
     }
-    public void imprimirLinked(){
+    public void imprimirLinked(int vueltas){
         Nodo<E> n=this.start;
-        int vueltas;
-        for (vueltas=0;vueltas<15;vueltas++){
+        int count;
+        int elementos;
+        for (elementos=0;elementos<=tamaño*vueltas;elementos++){
             
             System.out.println(n.getContenido()+"");
             n= n.getSiguiente();
-
         }
     }
     @Override
+    public E remove(int index) {
+        if(index<0 || index>=tamaño){
+            throw new IndexOutOfBoundsException(
+            "Indice fuera de los limites del LinkedLIst");
+        }
+        if (index==0){
+            Nodo<E> eliminado= start;
+            Nodo<E> sprevio= start.getPrevio();
+            Nodo<E> snext=start.getSiguiente();
+            snext.setPrevio(sprevio);
+            sprevio.setSiguiente(snext);
+            start=snext;
+            eliminado.setPrevio(null);
+            eliminado.setSiguiente(null);
+            tamaño--;
+            return eliminado.getContenido();
+        }
+        Nodo<E> encontrado=null;
+        if(index<tamaño/2){
+            encontrado=findNode(index);
+        }
+        else if(index>=tamaño/2){
+            encontrado=findNodeInverso(index);
+        }
+        Nodo<E> anterior=encontrado.getPrevio();
+        Nodo<E> next= encontrado.getSiguiente();
+        anterior.setSiguiente(next);
+        next.setPrevio(anterior);
+        encontrado.setPrevio(null);
+        encontrado.setSiguiente(null);
+        tamaño--;
+        
+        
+        return encontrado.getContenido();
+    }
+    private Nodo<E> findNode(int index){
+        int count=0;
+        Nodo <E> n;
+        for(n=this.start;n!=null; n=n.getSiguiente()){
+            if(count==index){
+                return n;
+            }
+            count++;
+        }
+        return null;
+    }
+    private Nodo<E> findNodeInverso(int index){
+        int count=tamaño-1;
+        Nodo <E> n;
+        for(n=this.start.getPrevio();n!=null; n=n.getPrevio()){
+            if(count==index){
+                return n;
+            }
+            count--;
+        }
+        return null;
+    }
+    @Override
+    public void add(int index, E element) {
+        boolean pass=true;
+        if(index<0 || index>tamaño){
+            throw new IndexOutOfBoundsException(
+            "Indice fuera de los límites del LinkedLIst");
+        }
+        else if (index==tamaño){
+            add(element);
+            pass=false;
+        }
+        Nodo<E> encontrado=null;
+        if(index<tamaño/2){
+            encontrado=findNode(index);
+        }
+        else if(index>=tamaño/2){
+            encontrado=findNodeInverso(index);
+        }
+        Nodo <E> nuevoNodo= new Nodo(element);
+        Nodo<E> anterior=encontrado.getPrevio();
+        anterior.setSiguiente(nuevoNodo);
+        nuevoNodo.setPrevio(anterior);
+        encontrado.setPrevio(nuevoNodo);
+        nuevoNodo.setSiguiente(encontrado);
+        if(index==0){this.start=nuevoNodo;}
+        tamaño++;
+    }
+    @Override
+    public E get(int index) {
+        if(index==0){return this.start.contenido;}
+        else if (index<0){
+            throw new IndexOutOfBoundsException(
+                    "Indice fuera de los límites del LinkedLIst");
+        }
+        Nodo <E> encontrado=findNode(index);
+        return (encontrado!=null)?encontrado.getContenido():null;
+    }
+    @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getTamaño();
     }
 
     @Override
@@ -156,23 +253,10 @@ public class LCD<E> implements List<E>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public E get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
     @Override
     public E set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void add(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public E remove(int index) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
