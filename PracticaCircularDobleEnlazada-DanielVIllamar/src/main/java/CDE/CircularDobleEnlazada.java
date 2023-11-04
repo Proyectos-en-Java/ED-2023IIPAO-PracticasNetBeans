@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @author CltControl
  */
+//Programa compilado con maven 11 en caso de error modificar el pom
 public class CircularDobleEnlazada {
 
     public static void main(String[] args) {
