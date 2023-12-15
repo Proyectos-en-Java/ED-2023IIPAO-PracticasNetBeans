@@ -4,8 +4,10 @@
  */
 package g10.heapdv;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -110,6 +112,24 @@ public class HeapDV<E> {
         E temp = arreglo[i];
         arreglo[i] = arreglo[j];
         arreglo[j] = temp;
+    }
+    //TAREA IMPLEMENTACION:
+    public List<E> heapSort(List<E> lista) {
+        // Crear un HeapDV usando el comparador actual
+        HeapDV<E> heap = new HeapDV<>(comparador);
+
+        // Agregar todos los elementos de la lista al heap
+        for (E elemento : lista) {
+            heap.encolar(elemento);
+        }
+
+        // Crear una lista ordenada utilizando el heap
+        List<E> listaOrdenada = new ArrayList<>();
+        while (!heap.isEmpty()) {
+            listaOrdenada.add(heap.desencolar());
+        }
+
+        return listaOrdenada;
     }
 
     @Override

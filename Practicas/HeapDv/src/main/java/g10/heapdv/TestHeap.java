@@ -4,7 +4,9 @@
 
 package g10.heapdv;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -27,6 +29,18 @@ public class TestHeap {
         while(!maxHeap.isEmpty()){
             System.out.println(maxHeap.desencolar());
         }
+        
+        //Tarea
+        List<Integer> listaDesordenada= new ArrayList();
+        listaDesordenada.add(34);
+        listaDesordenada.add(130);
+        listaDesordenada.add(200);
+        listaDesordenada.add(1);
+        listaDesordenada.add(20);
+        listaDesordenada.add(14);
+        HeapDV<Integer> heap = new HeapDV<>(comparador);
+        List<Integer> listaOrdenada = heap.heapSort(listaDesordenada);
+        System.out.println("Lista ordenada Heap Sort: " + listaOrdenada);
         
     }
 }
